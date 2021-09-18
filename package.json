@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "browserify": "^17.0.0",
+    "parse-multipart": "^1.0.4"
+  }
+}
