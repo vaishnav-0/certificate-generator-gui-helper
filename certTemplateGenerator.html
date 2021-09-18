@@ -1,0 +1,38 @@
+<html>
+
+<head>
+  <title>Create certificate</title>
+  <style></style>
+  </script>
+</head>
+
+<body>
+  <div id="cert"></div>
+  <button id="info">info</button>
+  <button id="add">add</button>
+  <script>
+
+  </script>
+  <script type="module">
+    import Certificate from './certificate.js';
+      import {Parse,getBoundary} from './multipart-parse.js';
+      const certificate = new Certificate(
+        "certificate.png",
+        { width: 1000},
+      );
+      window.cert = certificate;
+      certificate.mount(document.getElementById("cert"));
+      document.getElementById("info").onclick = ()=>{
+        console.log(certificate.getAllMarkerGeometry());
+      };
+      document.getElementById("add").onclick = ()=>{certificate.addMarker((Math.random() + 1).toString(36).substring(7))};
+      let res = await fetch('http://localhost:5001/certificate-generator-58b22/us-central1/cert?name=john doe&width=1098&height=60&x=273&y=410');
+      let Uint8A = await res.arrayBuffer();
+      const boundary = res.headers.get("content-type").split("=")[1];
+      console.log(Parse(Uint8A,boundary));
+
+
+    </script>
+</body>
+
+</html>
